@@ -14,8 +14,9 @@ import water.util.ArrayUtils;
 
 /**
  * R 'diff' command.
- * <p/>
- * This method is purely for the console right now.  Print stuff into the string buffer.
+ *
+ * This method is purely for the console right now.
+ * Print stuff into the string buffer.
  * JSON response is not configured at all.
  */
 public class AstDiff extends AstPrimitive {
@@ -25,18 +26,18 @@ public class AstDiff extends AstPrimitive {
   }
 
   @Override
-  public int nargs() {
-    return 1 + 1;
-  }
-
-  @Override
   public String str() {
     return "diff";
   }
 
   @Override
+  public int nargs() {
+    return 1 + 1;
+  }
+
+  @Override
   public Val apply(Env env, Env.StackHelp stk, AstRoot asts[]) {
-    Frame fr = stk.track(asts[1].exec(env).getFrame());
+    Frame fr = stk.track(asts[1].exec(env)).getFrame();
     if (fr.numCols() != 1)
       throw new IllegalArgumentException("Expected a single column for diff. Got: " + fr.numCols() + " columns.");
     if (!fr.anyVec().isNumeric())
